@@ -1,4 +1,4 @@
-# BirdDog — Build Brief
+# Poach — Build Brief
 
 *Two agents, one pilot. Drafted 2 Sep 2026. Supersedes the Facebook-cycle notes.*
 
@@ -29,42 +29,25 @@ you can hold. Sell the Watcher, earn the trust, then offer posting.
 
 ---
 
-## 2. The name
+## 2. The name: settled — Poach
 
-A "bird dog" is already trade vernacular for the person who finds you work and brings
-it to you. It needs no explanation to this ICP, and it literally describes the
-Watcher: sits, watches, flushes out the lead, retrieves it.
+Already chosen and live at `poach-iota.vercel.app`, with the positioning built around
+it — "Be the first contractor to reply," one contractor per town, under 90 seconds. The
+name names the outcome rather than the mechanism, and says nothing about which platform
+the posts come from, so it survives adding Nextdoor, town boards and whatever follows.
 
-| Name | Read |
-| --- | --- |
-| **BirdDog** *(recommended)* | Trade-native, describes the mechanism. `birddog.com` / `.tv` are gone to a video hardware brand — take `getbirddog.com` or `birddogleads.com`, register as **BirdDog Leads**. |
-| First Knock | Pure speed positioning — be first at the door. Cleaner for a cold text, weaker once the Poster joins. |
-| Territory | Sells the exclusivity (one contractor per town per trade), which is the real moat. Says nothing about leads. |
+### The one naming task still open
 
-### Rules the name has to survive
+SMS *is* the product, so A2P 10DLC registration with the carriers gates the whole
+channel. Brand vetting checks that your registered business entity, brand name and
+website domain all match — so register the entity as Poach and file the campaign
+against the Poach domain, not a personal LLC or the `vercel.app` subdomain.
+Unregistered traffic gets filtered or dropped silently, with no error to debug. This
+is on the critical path next to group approvals; start both now.
 
-- **No Facebook, FB, Meta, Group or Book in it.** Trademark exposure aside, don't name
-  the company after the platform you're scraping — and it becomes a liability the day
-  you add Nextdoor, Craigslist and town boards.
-- **No "AI" or "Agent."** This ICP discounts it, and it advertises automation to the
-  platform you'd rather stay boring to.
-- **Own the .com.** A `.io` or `.ai` reads as a scam to a contractor already primed to
-  expect one.
-- **Name the outcome, not the mechanism.** The mechanism is what's most likely to
-  change under you.
-
-### Why this settles now, not after the pilot
-
-SMS *is* the product, so you need A2P 10DLC registration with the carriers through
-Twilio. That vetting checks that your brand name, registered business entity and
-website domain all match. Pick the name → register the LLC → buy the matching .com →
-put the site up → then file the 10DLC campaign. Renaming after registration means
-re-vetting, and unregistered traffic gets filtered or dropped silently, which kills the
-product without an error message.
-
-Whatever the company is called, keep the internal names **the Watcher** and **the
-Poster**. Clear on an ops board, and they let you sell monitoring standalone without
-the brand implying you also auto-post.
+Internally the agents keep the names the site already uses: **the Watcher**
+(monitoring — the Territory and Premium suburb tiers) and **the Poster** (the Presence
+add-on).
 
 ---
 
