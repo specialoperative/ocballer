@@ -1,0 +1,48 @@
+{
+  "targets": [
+    {
+      "id": "fb:scarsdale-neighbors",
+      "groupName": "Scarsdale Neighbors",
+      "platform": "facebook",
+      "allowed": true,
+      "promoWeekday": "Wed",
+      "minDaysBetweenPosts": 14,
+      "rules": "Business posts allowed Wednesdays only. No links in the post body. No before/after spam."
+    },
+    {
+      "id": "fb:scarsdale-moms",
+      "groupName": "Scarsdale Moms",
+      "platform": "facebook",
+      "allowed": false,
+      "minDaysBetweenPosts": 30,
+      "rules": "No business posts of any kind. Recommendations only, from members."
+    },
+    {
+      "id": "nd:scarsdale",
+      "groupName": "Nextdoor · Scarsdale",
+      "platform": "nextdoor",
+      "allowed": true,
+      "minDaysBetweenPosts": 7,
+      "rules": "Business accounts may post to the local feed. Keep it useful, not promotional."
+    }
+  ],
+  "clients": [
+    {
+      "id": "deluca-roofing",
+      "businessName": "DeLuca Roofing",
+      "town": "Scarsdale",
+      "state": "NY",
+      "trade": "Roofing",
+      "approverPhone": "+19145554417",
+      "voiceNote": "Plain and direct. Third-generation local. Mentions specific streets and storms. Never sells hard.",
+      "talkingPoints": [
+        "slate and cedar shake specialist",
+        "free roof check after storms",
+        "works Scarsdale, Edgemont and Hartsdale"
+      ],
+      "neverSay": ["licensed and insured", "any price or discount", "lifetime warranty"],
+      "targets": ["fb:scarsdale-neighbors", "fb:scarsdale-moms", "nd:scarsdale"],
+      "timezone": "America/New_York"
+    }
+  ]
+}
