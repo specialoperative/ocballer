@@ -1,0 +1,40 @@
+{
+  "sources": [
+    {
+      "kind": "collector",
+      "id": "nextdoor:scarsdale",
+      "platform": "nextdoor",
+      "feedId": "scarsdale-ny",
+      "groupName": "Nextdoor · Scarsdale"
+    },
+    {
+      "kind": "collector",
+      "id": "facebook:scarsdale-neighbors",
+      "platform": "facebook",
+      "feedId": "scarsdale-neighbors",
+      "groupName": "Scarsdale Neighbors"
+    },
+    { "kind": "ingest", "id": "ingest" }
+  ],
+  "territories": [
+    {
+      "id": "scarsdale-roofing",
+      "town": "Scarsdale",
+      "state": "NY",
+      "trade": "Roofing",
+      "tier": "premium",
+      "keywords": ["slate", "cedar shake", "copper gutter"],
+      "contractor": {
+        "name": "Mike DeLuca",
+        "businessName": "DeLuca Roofing",
+        "phone": "+19145554417",
+        "voiceNote": "Plain, direct, no sales language. Mentions he is local and can come look."
+      },
+      "sources": ["nextdoor:scarsdale", "facebook:scarsdale-neighbors", "ingest"],
+      "timezone": "America/New_York",
+      "quietHours": { "start": 21, "end": 7 },
+      "maxAlertsPerDay": 12,
+      "trialEndsAt": "2026-09-09T00:00:00Z"
+    }
+  ]
+}

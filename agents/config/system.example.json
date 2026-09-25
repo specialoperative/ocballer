@@ -1,0 +1,70 @@
+{
+  "accounts": [
+    {
+      "id": "acct-main",
+      "label": "Primary poster account",
+      "platform": "facebook",
+      "nodeId": "edge-1",
+      "maxPostsPerDay": 3,
+      "minMinutesBetweenPosts": 120
+    },
+    {
+      "id": "acct-second",
+      "label": "Second machine account",
+      "platform": "facebook",
+      "nodeId": "edge-2",
+      "maxPostsPerDay": 3,
+      "minMinutesBetweenPosts": 120
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "grp-neighbors",
+      "label": "Town Neighbors",
+      "platform": "facebook",
+      "accountId": "acct-main",
+      "allowed": true,
+      "rules": "Business posts Wednesdays only. No links in the body.",
+      "minHoursBetweenPosts": 336
+    },
+    {
+      "id": "grp-buysell",
+      "label": "Town Buy / Sell",
+      "platform": "facebook",
+      "accountId": "acct-second",
+      "allowed": true,
+      "rules": "Local businesses welcome. Keep it useful.",
+      "minHoursBetweenPosts": 168
+    },
+    {
+      "id": "grp-moms",
+      "label": "Town Moms",
+      "platform": "facebook",
+      "accountId": "acct-main",
+      "allowed": false,
+      "rules": "No business posts of any kind.",
+      "minHoursBetweenPosts": 720
+    }
+  ],
+  "businesses": [
+    {
+      "id": "biz-1",
+      "name": "Corner Barber Co.",
+      "phone": "+19145554417",
+      "voice": "Short, friendly, no sales language. Mentions the shop by street.",
+      "facts": ["walk-ins welcome Tuesday to Saturday", "two chairs", "kids cuts"],
+      "neverSay": ["any price", "licensed and insured", "best in town"]
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "camp-1",
+      "businessId": "biz-1",
+      "surfaceIds": ["grp-neighbors", "grp-buysell", "grp-moms"],
+      "postDays": [1, 3, 4],
+      "postHourRange": { "start": 9, "end": 17 },
+      "timezone": "America/New_York",
+      "themes": ["back to school cuts", "Saturday walk-in hours"]
+    }
+  ]
+}

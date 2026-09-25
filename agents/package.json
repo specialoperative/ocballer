@@ -1,0 +1,27 @@
+{
+  "name": "agents",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Agent runtime: scoped agents that watch surfaces for keywords and post approved content on a schedule.",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "smoke": "tsx src/smoke.ts",
+    "e2e": "tsx src/e2e.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.72.0",
+    "better-sqlite3": "^11.7.0",
+    "dotenv": "^16.4.7",
+    "twilio": "^5.4.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,414 @@
+<title>Poach Build Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F4F5F2;
+    --card:#FFFFFF;
+    --ink:#17211C;
+    --ink-soft:#4A574F;
+    --ink-faint:#7C8981;
+    --rule:#D9DDD6;
+    --rule-firm:#BFC6BC;
+    --field:#2E6B4F;
+    --field-soft:#E3EDE6;
+    --signal:#B4501C;
+    --signal-soft:#F6E7DE;
+    --flag:#8A6D1F;
+    --code-bg:#EDEFEA;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#121714;
+      --card:#1A211D;
+      --ink:#E7EBE6;
+      --ink-soft:#AEB8B0;
+      --ink-faint:#7F8C84;
+      --rule:#2A332D;
+      --rule-firm:#3B463F;
+      --field:#6FBF95;
+      --field-soft:#1D2B23;
+      --signal:#E58C57;
+      --signal-soft:#2C2019;
+      --flag:#D2B364;
+      --code-bg:#1E2622;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121714;
+    --card:#1A211D;
+    --ink:#E7EBE6;
+    --ink-soft:#AEB8B0;
+    --ink-faint:#7F8C84;
+    --rule:#2A332D;
+    --rule-firm:#3B463F;
+    --field:#6FBF95;
+    --field-soft:#1D2B23;
+    --signal:#E58C57;
+    --signal-soft:#2C2019;
+    --flag:#D2B364;
+    --code-bg:#1E2622;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px 96px}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  header.mast{padding:56px 0 28px;border-bottom:2px solid var(--ink);}
+  .mast h1{
+    font-family:"Zilla Slab",Georgia,serif;
+    font-weight:700;font-size:clamp(38px,7vw,58px);line-height:1.02;
+    letter-spacing:-.015em;margin:14px 0 10px;text-wrap:balance;
+  }
+  .mast .deck{
+    font-size:19px;color:var(--ink-soft);max-width:62ch;margin:0;
+  }
+  .mast .meta{
+    display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-faint);
+  }
+
+  section{padding-top:52px}
+  h2{
+    font-family:"Zilla Slab",Georgia,serif;font-weight:600;
+    font-size:29px;line-height:1.2;letter-spacing:-.01em;
+    margin:10px 0 6px;text-wrap:balance;
+  }
+  h3{
+    font-family:"Zilla Slab",Georgia,serif;font-weight:600;
+    font-size:20px;margin:34px 0 6px;text-wrap:balance;
+  }
+  p{margin:0 0 16px;max-width:66ch}
+  strong{font-weight:600}
+  em{color:var(--ink-soft)}
+  a{color:var(--field);text-decoration-thickness:1px;text-underline-offset:2px}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--field);outline-offset:3px;border-radius:2px}
+
+  code{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.86em;
+    background:var(--code-bg);padding:1px 5px;border-radius:3px;color:var(--ink);
+  }
+
+  /* ---- numbered build sequence: the numbers are real build order ---- */
+  ol.steps{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:22px}
+  ol.steps > li{
+    display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;
+  }
+  ol.steps > li::before{
+    content:counter(step,decimal-leading-zero);counter-increment:step;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:13px;font-weight:600;
+    color:var(--field);padding-top:3px;font-variant-numeric:tabular-nums;
+    border-top:2px solid var(--field);
+  }
+  ol.steps{counter-reset:step}
+  ol.steps .st{font-weight:600;display:block;margin-bottom:2px}
+  ol.steps p{margin:0;max-width:60ch;color:var(--ink-soft)}
+
+  /* ---- plain lists ---- */
+  ul.plain{margin:0 0 16px;padding-left:20px;max-width:66ch}
+  ul.plain li{margin-bottom:9px}
+  ul.plain li::marker{color:var(--ink-faint)}
+
+  /* ---- the one lifted block per section type ---- */
+  .verdict{
+    background:var(--field-soft);
+    border-left:3px solid var(--field);
+    padding:18px 22px;margin:22px 0;
+  }
+  .verdict p:last-child{margin-bottom:0}
+  .verdict .label{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--field);font-weight:600;
+    display:block;margin-bottom:6px;
+  }
+  .caution{
+    background:var(--signal-soft);
+    border-left:3px solid var(--signal);
+    padding:18px 22px;margin:22px 0;
+  }
+  .caution p:last-child{margin-bottom:0}
+  .caution .label{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--signal);font-weight:600;
+    display:block;margin-bottom:6px;
+  }
+
+  /* ---- tables ---- */
+  .tablewrap{overflow-x:auto;margin:22px 0}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+  th,td{text-align:left;padding:11px 14px 11px 0;vertical-align:top;border-bottom:1px solid var(--rule)}
+  thead th{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+    border-bottom:1px solid var(--rule-firm);padding-bottom:8px;
+  }
+  td:first-child{font-weight:600;white-space:nowrap;padding-right:22px}
+  tbody tr:last-child td{border-bottom:none}
+
+  .state{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:600;
+    letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px;
+    display:inline-block;
+  }
+  .state.open{background:var(--field-soft);color:var(--field)}
+  .state.taken{background:var(--signal-soft);color:var(--signal)}
+  .state.wait{background:var(--code-bg);color:var(--ink-soft)}
+
+  /* ---- architecture chain ---- */
+  .chain{
+    display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin:24px 0;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  .chain .node{
+    flex:1 1 150px;background:var(--card);border:1px solid var(--rule-firm);
+    padding:12px 14px;
+  }
+  .chain .node b{display:block;font-size:12.5px;letter-spacing:.02em;margin-bottom:4px;color:var(--ink)}
+  .chain .node span{font-size:12px;color:var(--ink-faint);line-height:1.45;display:block;font-family:"Source Sans 3",sans-serif}
+  .chain .arrow{display:flex;align-items:center;color:var(--ink-faint);font-size:15px}
+  @media (max-width:640px){ .chain .arrow{display:none} }
+
+  /* ---- name candidates ---- */
+  .names{display:flex;flex-direction:column;gap:0;margin:24px 0}
+  .names .row{
+    display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:18px;
+    padding:16px 0;border-bottom:1px solid var(--rule);align-items:baseline;
+  }
+  .names .row:first-child{border-top:1px solid var(--rule-firm)}
+  .names .nm{font-family:"Zilla Slab",Georgia,serif;font-size:21px;font-weight:600}
+  .names .row.pick .nm{color:var(--field)}
+  .names .row p{margin:0;font-size:15.5px;color:var(--ink-soft)}
+  .names .tag{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--field);display:block;margin-top:3px;
+  }
+
+  footer{
+    margin-top:64px;padding-top:20px;border-top:1px solid var(--rule);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-faint);
+  }
+  @media (prefers-reduced-motion:no-preference){
+    a{transition:color .15s ease}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">Working brief · Two agents, one pilot</div>
+    <h1>Poach</h1>
+    <p class="deck">A watcher that texts a contractor the second someone in their town asks for their trade — and a poster that keeps them visible in the groups the rest of the week.</p>
+    <div class="meta">
+      <span>Drafted 2 Sep 2026</span>
+      <span>Status: pre-pilot</span>
+      <span>Entry product: the Watcher</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">What the notes describe</div>
+    <h2>Two agents, not one product</h2>
+    <p>The legend in your notes — □ agent, ○ business, △ group — describes two separate machines that happen to share plumbing. Worth keeping them separate in your head, because only one of them is sellable this month.</p>
+    <ul class="plain">
+      <li><strong>The Poster (□ → △).</strong> Scheduled posting into neighborhood groups on behalf of a business, with the business approving copy and creative before anything goes out.</li>
+      <li><strong>The Watcher (□ sits on △).</strong> Sits on group feeds, reloads, scans for keywords, and texts the business when someone asks for their trade. This is your speed-to-lead product wearing a different hat.</li>
+    </ul>
+    <p>ICP for both: home services, restaurants, tattoo and barber shops, nonprofits. The Watcher is much stronger for home services specifically, because "anyone know a good roofer in Scarsdale?" is a question people actually type into neighborhood groups, and a plate of food is not.</p>
+    <div class="verdict">
+      <span class="label">Sequencing</span>
+      <p>Lead with the Watcher. It demos in one text message, it shows ROI the first week, and it needs no credentials from the customer. The Poster requires the business's login on day one, which is the hardest ask in the whole product and the riskiest thing you can hold. Sell the Watcher, earn the trust, then offer posting.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Naming</div>
+    <h2>Settled: Poach</h2>
+    <p>Already chosen and already live at <code>poach-iota.vercel.app</code>, with the positioning built around it — "Be the first contractor to reply," one contractor per town, under 90 seconds. The name does the work this ICP needs: it is a verb a contractor would use for exactly this, it names the outcome rather than the mechanism, and it says nothing about which platform the posts come from, so it survives adding Nextdoor, town boards and whatever comes after.</p>
+
+    <div class="caution">
+      <span class="label">The one naming task still open</span>
+      <p>SMS <em>is</em> the product, so A2P 10DLC registration with the carriers gates the whole channel. Brand vetting checks that your registered business entity, brand name and website domain all match — so register the entity as Poach and file the campaign against the Poach domain, not a personal LLC or the <code>vercel.app</code> subdomain. Unregistered traffic gets filtered or dropped silently, with no error to debug. This sits on the critical path next to group approvals; start both now.</p>
+    </div>
+
+    <p>Internally the two agents keep the names the site already uses: <strong>the Watcher</strong> (monitoring, sold as Territory and Premium suburb) and <strong>the Poster</strong> (sold as the Presence add-on). Clear on an ops board, and it keeps the posting product separable from the monitoring one.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Agent 2 · Build sequence</div>
+    <h2>The Watcher</h2>
+    <p>Goal: under 90 seconds from someone posting "need a plumber in Rye" to that plumber's phone buzzing. Everything below serves that number.</p>
+
+    <ol class="steps">
+      <li>
+        <span class="st">Define the territory grid</span>
+        <p>Town × trade is the unit of inventory and the unit of sale. Seed it with towns you can actually get into, not the whole county.</p>
+      </li>
+      <li>
+        <span class="st">Get into the groups — start now</span>
+        <p>A warmed, human-looking account requesting to join each neighborhood group. Admin approval takes days to weeks and some never approve. This is the long pole of the entire business; every week you delay here is a week of dead inventory.</p>
+      </li>
+      <li>
+        <span class="st">Write the keyword list per trade</span>
+        <p>Not just the noun. The ask-phrasings and the symptoms: "roofer", "roof leak", "shingles", "anyone know a good", "recommendations for", plus common misspellings. People describe the problem far more often than the trade.</p>
+      </li>
+      <li>
+        <span class="st">Build the poll loop</span>
+        <p>Persistent browser session, load each group's feed sorted by recent, on an interval with jitter so the cadence isn't machine-regular. Dedupe on post ID so one post never fires twice.</p>
+      </li>
+      <li>
+        <span class="st">Classify before alerting</span>
+        <p>An LLM pass on each new post: is this real hire intent, for this trade, in this town? This is what separates a product from a keyword firehose — it kills "anyone have a recommendation for a good preschool" before it reaches the customer's phone.</p>
+      </li>
+      <li>
+        <span class="st">Fire the SMS</span>
+        <p>What was asked, which group, who asked, a direct link, and a suggested reply they can paste. The suggested reply is what turns a notification into a closed job.</p>
+      </li>
+      <li>
+        <span class="st">Quiet hours and a daily cap</span>
+        <p>No 2am texts, and a ceiling on alerts per day. One irrelevant 11pm buzz costs you more trust than three good leads earn.</p>
+      </li>
+      <li>
+        <span class="st">The business replies — not the agent</span>
+        <p>They comment in the group themselves, in their own voice, as themselves. Auto-replying is the single fastest way to get an account killed and the customer's name attached to spam. Hold this line even when customers ask you to cross it.</p>
+      </li>
+      <li>
+        <span class="st">Log every outcome</span>
+        <p>Alert sent, replied or not, job won or not. At the end of the free week this log <em>is</em> your close: "we sent you eleven, you replied to four, you booked two."</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="eyebrow">Agent 1 · Build sequence</div>
+    <h2>The Poster</h2>
+    <p>Your notes already contain the important architectural instinct here: the agent that holds the credentials is not the agent that posts.</p>
+
+    <ol class="steps">
+      <li>
+        <span class="st">Credential handoff — the hard ask</span>
+        <p>The business's login. Prefer a Page role invite or a delegated access path over holding a password wherever the platform allows it; a stored customer password is a liability you carry indefinitely, including after they churn.</p>
+      </li>
+      <li>
+        <span class="st">Spawn the posting-only agent (□²)</span>
+        <p>The separation of duties from your notes. The credential-holder never posts; a second, narrowly scoped agent does nothing but publish already-approved copy. If the poster misbehaves or is compromised, the blast radius is one post, not one account.</p>
+      </li>
+      <li>
+        <span class="st">Generate copy and creative into a queue</span>
+        <p>Drafted per business, per group, held for review. Nothing reaches a group unreviewed.</p>
+      </li>
+      <li>
+        <span class="st">Business approves — hard gate</span>
+        <p>Explicit approval of both copy and creative before anything publishes. This was underlined in your notes and it should stay non-negotiable: it's your liability shield and it's the reason a business will trust you with the account at all.</p>
+      </li>
+      <li>
+        <span class="st">Schedule Mon / Wed / Thu</span>
+        <p>Per-group cadence caps and staggered times. The same post hitting six groups within a minute is the signature that gets accounts flagged.</p>
+      </li>
+      <li>
+        <span class="st">Check each group's own rules</span>
+        <p>Promo rules differ per group — some ban business posts outright, some allow one day a week. Maintain a per-group allow/deny list or you'll get the customer banned from their own neighborhood.</p>
+      </li>
+      <li>
+        <span class="st">Publish and capture the permalink</span>
+        <p>Store the live URL for the report, and so the business can go engage with replies themselves.</p>
+      </li>
+      <li>
+        <span class="st">Decide the comment question</span>
+        <p>Your margin note flagged boosting comments as possibly unwanted. Recommendation: don't. Auto-commenting to boost reach is the highest-risk, lowest-trust behavior in the whole system.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="eyebrow">Signup</div>
+    <h2>Three slot states, one gate</h2>
+    <p>Town and trade come first on the form, before name or email, because that's what determines whether they can sign up at all. The moment they pick, the server answers one of three ways.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>State</th><th>Means</th><th>What they see</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="state open">Open</span></td>
+            <td>You watch that town, slot is free</td>
+            <td>"Scarsdale roofing is open. Claim it." Straight through to details.</td>
+          </tr>
+          <tr>
+            <td><span class="state taken">Taken</span></td>
+            <td>Someone holds that town × trade</td>
+            <td>"Scarsdale roofing is claimed." Offer the waitlist or a nearby town. This is the exclusivity promise doing its job in public.</td>
+          </tr>
+          <tr>
+            <td><span class="state wait">Uncovered</span></td>
+            <td>You're not in that town's groups yet</td>
+            <td>"We're not live in Rye yet — reserve your slot, live in about two weeks." Loud, on the payment screen, not in fine print.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Then: name, business, cell, email — and verify the cell with a one-time code right there. The entire product is SMS, so a wrong or fake number means they get nothing and churn on day one. Catch it at signup.</p>
+    <p>Then a light contractor check. Because a slot is exclusive, you can't let a tire-kicker — or worse, a competitor blocking a rival — lock Scarsdale roofing. Business name, a website or business page, confirm they do that trade in that area. You eyeball it yourself early; automate it later.</p>
+
+    <div class="verdict">
+      <span class="label">Card up front? Not for the pilot</span>
+      <p>Contractors are card-shy, the free week is the whole pitch, and you're closing by text or call at the end anyway. Collecting a card adds friction for no benefit while onboarding is manual. Flip to card-on-file with a Stripe trial once you're automated and the human close stops scaling.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Architecture</div>
+    <h2>The page is the storefront, not the store</h2>
+    <p>The Vercel page handles marketing, the slot board, the form and checkout handoff. What it cannot do alone: know that Scarsdale roofing is taken, verify a phone, charge a card safely, or turn the Watcher on. Anything involving money, real availability or account access runs server-side where a visitor can't tamper with it — if availability lived in the page's code, two people could claim the same slot and you'd never know.</p>
+
+    <div class="chain">
+      <div class="node"><b>Vercel page</b><span>Marketing, slot board, form. Asks the server; never decides.</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>API + database</b><span>The truth: slots, claims, verification, customers.</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>Stripe Checkout</b><span>Hosted, so card details never touch your code.</span></div>
+      <div class="arrow">→</div>
+      <div class="node"><b>Activation queue</b><span>Covered town: automatic. Uncovered: your ops list.</span></div>
+    </div>
+
+    <p>Vercel can host both halves — the marketing front end and serverless API routes against a Postgres database — so this isn't a second stack, but the server layer has to exist.</p>
+
+    <div class="caution">
+      <span class="label">Don't build this first</span>
+      <p>For the pilot, the form can just email you the signup. You check the slot by hand, verify and onboard by text, no Stripe, no availability API. That's a legitimate signup for the first three to five customers and it launches this week instead of after the backend. Build the machine once you've proven by hand that people want to get on it — and once the scraper has proven durable enough to be worth automating around.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Open items</div>
+    <h2>What could break this</h2>
+    <ul class="plain">
+      <li><strong>Platform automation rules.</strong> Both agents operate against Facebook's automation policy. Account durability is an operational cost, not an edge case — budget for accounts dying and plan how a customer's coverage survives it.</li>
+      <li><strong>Credential custody.</strong> Holding a customer's login for the Poster is a real liability. Decide your storage, rotation and offboarding story before the first customer hands one over, not after.</li>
+      <li><strong>Carrier registration.</strong> 10DLC brand vetting gates the entire SMS channel and takes time. It's on the critical path with group approvals, so start both now.</li>
+      <li><strong>Exclusivity integrity.</strong> The moment you sell a second roofer in the same town, the promise is dead and the story travels. The slot table has to be the single source of truth, server-side, with no manual overrides.</li>
+      <li><strong>Honest wait times.</strong> Taking money for an uncovered town and going quiet for two weeks is the fastest way to torch the brand with an audience already expecting a scam.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Poach · working brief · supersedes the Facebook-cycle notes
+  </footer>
+
+</div>
