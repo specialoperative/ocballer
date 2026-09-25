@@ -1,0 +1,21 @@
+{
+  "name": "yield",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Measures hire-intent density in captured posts: the number that decides whether a group is worth monitoring.",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "smoke": "tsx src/smoke.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.72.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
